@@ -39,37 +39,37 @@ public class ListActivity extends AppCompatActivity {
     List<Employee> eList = new ArrayList<>();
 
 
-    class EmployeeAdapter extends ArrayAdapter<Employee> {
-
-        public EmployeeAdapter(Context ctx, int textViewResourceId) {
-            super(ctx, textViewResourceId);
-        }
-
-        public EmployeeAdapter() {
-            super(ListActivity.this, android.R.layout.simple_list_item_1, eList);
-        }
-
-        @Override
-        public View getView(int position, View convertView, ViewGroup parent) {
-            View row = convertView;
-            if (row == null) {
-                LayoutInflater inflater = getLayoutInflater();
-                row = inflater.inflate(R.layout.row, null);
-
-            }
-
-            Employee p = eList.get(position);
-
-            ((TextView) row.findViewById(R.id.id)).setText("ID: " + p.getId());
-            ((TextView) row.findViewById(R.id.ten)).setText("Ten: " + p.getTen());
-            ((TextView) row.findViewById(R.id.ngaySinh)).setText("Ngay Sinh: " + p.getNgaysinh());
-            ((TextView) row.findViewById(R.id.email)).setText("Email: " + p.getEmail());
-
-            return row;
-        }
-
-    }
-
+//    class EmployeeAdapter extends ArrayAdapter<Employee> {
+//
+//        public EmployeeAdapter(Context ctx, int textViewResourceId) {
+//            super(ctx, textViewResourceId);
+//        }
+//
+//        public EmployeeAdapter() {
+//            super(ListActivity.this, android.R.layout.simple_list_item_1, eList);
+//        }
+//
+//        @Override
+//        public View getView(int position, View convertView, ViewGroup parent) {
+//            View row = convertView;
+//            if (row == null) {
+//                LayoutInflater inflater = getLayoutInflater();
+//                row = inflater.inflate(R.layout.row, null);
+//
+//            }
+//
+//            Employee p = eList.get(position);
+//
+//            ((TextView) row.findViewById(R.id.id)).setText("ID: " + p.getId());
+//            ((TextView) row.findViewById(R.id.ten)).setText("Ten: " + p.getTen());
+//            ((TextView) row.findViewById(R.id.ngaySinh)).setText("Ngay Sinh: " + p.getNgaysinh());
+//            ((TextView) row.findViewById(R.id.email)).setText("Email: " + p.getEmail());
+//
+//            return row;
+//        }
+//
+//    }
+//
 
 
     private AdapterView.OnItemClickListener onListClick = new AdapterView.OnItemClickListener() {
@@ -118,8 +118,10 @@ public class ListActivity extends AppCompatActivity {
     {
         lvEmployee = (ListView) findViewById(R.id.lvEmployee);
         eList = db.findAll();
-        EmployeeAdapter lvEmployeeAdapter = new EmployeeAdapter();
-        lvEmployee.setAdapter(lvEmployeeAdapter);
+
+            lvEmployee.setAdapter(new ArrayAdapter<Employee>(this, android.R.layout.simple_list_item_1, eList));
+//        EmployeeAdapter lvEmployeeAdapter = new EmployeeAdapter();
+//            lvEmployee.setAdapter(lvEmployeeAdapter);
 
 //        lvEmployee.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 //
@@ -218,7 +220,8 @@ public class ListActivity extends AppCompatActivity {
             }
         }
 
-        lvEmployee.setAdapter(new EmployeeAdapter());
+//        lvEmployee.setAdapter(new EmployeeAdapter());
+        lvEmployee.setAdapter(new ArrayAdapter<Employee>(this, android.R.layout.simple_list_item_1, eList));
     }
 
     @Override
